@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register page</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="../static/assets/css/main.css" />
+
+    <noscript
+      ><link rel="stylesheet" href="../static/assets/css/noscript.css"
+    /></noscript>
+    <!-- Agrega SweetAlert2 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header">
+        <h1>Register for free</h1>
+        <p>Start your path with python</p>
+      </header>
+
+      <!-- Main -->
+      <div id="main">
+        <!-- Register form -->
+        <section id="content" class="main">
+          <form id="registerForm" onsubmit="registerUser(event)">
+            <div class="mb-3">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary">
+                Create new account
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <!-- Footer -->
+      {% include 'footer.html' %}
+    </div>
+
+    <!-- Scripts -->
+    <script>
+      function registerUser(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const user = { name, email, password };
+
+        // Guarda los datos del usuario en localStorage
+        localStorage.setItem(email, JSON.stringify(user));
+
+        Swal.fire({
+          icon: "success",
+          title: "Cuenta creada exitosamente!",
+          confirmButtonText: "Ir al inicio de sesion",
+        }).then(() => {
+          window.location.href = "/login";
+        });
+      }
+    </script>
+  </body>
+</html>
